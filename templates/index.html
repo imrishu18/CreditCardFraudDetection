@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credit Card Fraud Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      animation: zoomIn 1.2s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 3rem;
+      background: linear-gradient(to right, #00f2fe, #4facfe);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #d1d1d1;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px rgba(0, 242, 254, 0.4);
+    }
+
+    .tech-stack {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #9bbbd4;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 6s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .bubble:nth-child(1) {
+      width: 80px; height: 80px; left: 10%; top: 20%;
+    }
+
+    .bubble:nth-child(2) {
+      width: 120px; height: 120px; left: 70%; top: 10%;
+    }
+
+    .bubble:nth-child(3) {
+      width: 60px; height: 60px; left: 40%; top: 60%;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div class="container">
+    <h1>Credit Card Fraud Detection System</h1>
+    <p>Experience real-time detection of fraudulent credit card transactions powered by Machine Learning.<br>
+      This project uses Python, Scikit-learn, and Flask to make smart decisions from user inputs.
+    </p>
+    <a href="{{ url_for('predict') }}">
+      <button class="btn">🚀 Get Started</button>
+    </a>
+
+    <div class="tech-stack">Built using 🐍 Python • 🤖 ML • 🧠 Scikit-learn • 🔥 Flask • 🎨 Animated UI</div>
+  </div>
+</body>
+</html>

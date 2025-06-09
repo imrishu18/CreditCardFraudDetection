@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Credit Card Fraud Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      color: #fff;
+      text-align: center;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 6s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .bubble:nth-child(1) { width: 80px; height: 80px; left: 10%; top: 20%; animation-delay: 0s; }
+    .bubble:nth-child(2) { width: 120px; height: 120px; left: 70%; top: 10%; animation-delay: 2s; }
+    .bubble:nth-child(3) { width: 60px; height: 60px; left: 40%; top: 60%; animation-delay: 4s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      animation: zoomIn 1.2s ease;
+      width: 90%;
+      max-width: 480px;
+      position: relative;
+      z-index: 10;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .heading-text {
+      background: linear-gradient(to right, #00f2fe, #4facfe);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    input[type="number"] {
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    input[type="number"]::placeholder {
+      color: #ccc;
+    }
+
+    button.btn {
+      padding: 1rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button.btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px rgba(0, 242, 254, 0.4);
+    }
+
+    .error-message {
+      background: rgba(255, 69, 58, 0.85);
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div class="container">
+    <h2>
+      <span style="font-size: 2rem;">💳</span>
+      <span class="heading-text">Check for Fraud</span>
+    </h2>
+
+    {% if error %}
+      <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('predict') }}">
+      {% for feature in selected_features %}
+        <input 
+          type="number"
+          step="any"
+          name="{{ feature.lower() }}"
+          placeholder="{{ feature.upper() }}"
+          required
+          value="{{ request.form.get(feature.lower(), '') }}" />
+      {% endfor %}
+      <button type="submit" class="btn">Check Transaction</button>
+    </form>
+  </div>
+</body>
+</html>
